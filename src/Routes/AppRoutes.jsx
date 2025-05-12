@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HeaderLayout from "../Layout/HeaderLayout";
 import HeaderNoneLayout from "../Layout/HeaderNoneLayout";
+import AdminHeaderLayout from "../Layout/AdminHeaderLayout";
 
 
 
@@ -13,7 +14,8 @@ import ForgotPassword from "../pages/ForgotPassword";
 import OnlineResult from "../pages/OnlineResult";
 import AdminLogin from "../pages/AdminLogin";
 import AdminUploadResult from "../pages/AdminUploadResult";
-
+import ResultStatus from "../pages/ResultStatus";
+import AdminControl from "../pages/AdminControl";
 
 
 
@@ -25,6 +27,7 @@ const AppRoutes = () => {
         <Route path="/Home" element={<Home />} />
         <Route path="/AboutUs" element={<AboutUs/>} />
         <Route path="/Location" element={<Location/>} />
+         
         </Route>
       
         <Route element={<HeaderNoneLayout />}>
@@ -32,11 +35,15 @@ const AppRoutes = () => {
         <Route path="/PatientLogin" element={<PatientLogin/>} />
         <Route path="/ForgotPassword" element={<ForgotPassword/>} />
         <Route path="/OnlineResult" element={<OnlineResult/>} />
-        <Route path="/AdminUploadResult" element={<AdminUploadResult/>} />
-
         
+        </Route>
 
-       </Route>
+        <Route element={<AdminHeaderLayout />}>
+       <Route path="/AdminUploadResult" element={<AdminUploadResult/>} />
+       <Route path="/ResultStatus" element={<ResultStatus/>} />
+       <Route path="/AdminControl" element={<AdminControl/>} />
+       
+        </Route>
 
     </Routes>
   );
