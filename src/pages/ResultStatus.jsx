@@ -29,63 +29,153 @@ function ResultStatus() {
           </div>
         </div>
 
-        <table className="w-full bg-white rounded shadow-md">
-          <thead>
-            <tr className="bg-blue-950 text-white">
-              <th className="py-2 px-4 text-center">Tracking Code</th>
-              <th className="py-2 px-4 text-center">Patient Name</th>
-              <th className="py-2 px-4 text-center">Service</th>
-              <th className="py-2 px-4 text-center">Result File</th>
-              <th className="py-2 px-4 text-center">Date Uploaded</th>
-              <th className="py-2 px-4 text-center">Uploaded By</th>
-              <th className="py-2 px-4 text-center">Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* First row */}
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2001</td>
-              <td className="py-2 px-4 text-center">Vender</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">Pending</td>
-              <td className="py-2 px-4 text-center">01/22/12</td>
-              <td className="py-2 px-4 text-center">Edmark</td>
-              <td className="py-2 px-4 text-center">
-                <button
-                  className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                  onClick={openModal}
-                >
-                  Details
-                </button>
-              </td>
-            </tr>
+        <div className="overflow-y-auto max-h-[400px] rounded-md border">
+          <table className="w-full bg-white text-sm">
+            <thead className="sticky top-0 z-10 bg-blue-950 text-white shadow-md">
+              <tr>
+                <th className="py-2 px-4 text-center">Tracking Code</th>
+                <th className="py-2 px-4 text-center">Patient Name</th>
+                <th className="py-2 px-4 text-center">Service</th>
+                <th className="py-2 px-4 text-center">Result File</th>
+                <th className="py-2 px-4 text-center">Date Uploaded</th>
+                <th className="py-2 px-4 text-center">Uploaded By</th>
+                <th className="py-2 px-4 text-center">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* First row */}
+              <tr className="hover:bg-gray-100">
+                <td className="py-2 px-4 text-center">2001</td>
+                <td className="py-2 px-4 text-center">Vender</td>
+                <td className="py-2 px-4 text-center">X-ray</td>
+                <td className="py-2 px-4 text-center">Pending</td>
+                <td className="py-2 px-4 text-center">01/22/12</td>
+                <td className="py-2 px-4 text-center">Edmark</td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    onClick={openModal}
+                  >
+                    Details
+                  </button>
+                </td>
+              </tr>
 
-            {/* Second row */}
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2002</td>
-              <td className="py-2 px-4 text-center">Arusa</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">Pending</td>
-              <td className="py-2 px-4 text-center">01/22/12</td>
-              <td className="py-2 px-4 text-center">Edmark</td>
-              <td className="py-2 px-4 text-center">
-                <button
-                  className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                  onClick={openModal}
-                >
-                  Details
-                </button>
-              </td>
-            </tr>
+              {/* Second row */}
+              <tr className="hover:bg-gray-100">
+                <td className="py-2 px-4 text-center">2002</td>
+                <td className="py-2 px-4 text-center">Arusa</td>
+                <td className="py-2 px-4 text-center">X-ray</td>
+                <td className="py-2 px-4 text-center">Pending</td>
+                <td className="py-2 px-4 text-center">01/22/12</td>
+                <td className="py-2 px-4 text-center">Edmark</td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    onClick={openModal}
+                  >
+                    Details
+                  </button>
+                </td>
+              </tr>
 
-            {/* Add more rows as needed */}
-          </tbody>
-        </table>
+              {/* Second row */}
+              <tr className="hover:bg-gray-100">
+                <td className="py-2 px-4 text-center">2002</td>
+                <td className="py-2 px-4 text-center">Arusa</td>
+                <td className="py-2 px-4 text-center">X-ray</td>
+                <td className="py-2 px-4 text-center">Pending</td>
+                <td className="py-2 px-4 text-center">01/22/12</td>
+                <td className="py-2 px-4 text-center">Edmark</td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    onClick={openModal}
+                  >
+                    Details
+                  </button>
+                </td>
+              </tr>
+
+              {/* Second row */}
+              <tr className="hover:bg-gray-100">
+                <td className="py-2 px-4 text-center">2002</td>
+                <td className="py-2 px-4 text-center">Arusa</td>
+                <td className="py-2 px-4 text-center">X-ray</td>
+                <td className="py-2 px-4 text-center">Pending</td>
+                <td className="py-2 px-4 text-center">01/22/12</td>
+                <td className="py-2 px-4 text-center">Edmark</td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    onClick={openModal}
+                  >
+                    Details
+                  </button>
+                </td>
+              </tr>
+
+              {/* Second row */}
+              <tr className="hover:bg-gray-100">
+                <td className="py-2 px-4 text-center">2002</td>
+                <td className="py-2 px-4 text-center">Arusa</td>
+                <td className="py-2 px-4 text-center">X-ray</td>
+                <td className="py-2 px-4 text-center">Pending</td>
+                <td className="py-2 px-4 text-center">01/22/12</td>
+                <td className="py-2 px-4 text-center">Edmark</td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    onClick={openModal}
+                  >
+                    Details
+                  </button>
+                </td>
+              </tr>
+
+              {/* Second row */}
+              <tr className="hover:bg-gray-100">
+                <td className="py-2 px-4 text-center">2002</td>
+                <td className="py-2 px-4 text-center">Arusa</td>
+                <td className="py-2 px-4 text-center">X-ray</td>
+                <td className="py-2 px-4 text-center">Pending</td>
+                <td className="py-2 px-4 text-center">01/22/12</td>
+                <td className="py-2 px-4 text-center">Edmark</td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    onClick={openModal}
+                  >
+                    Details
+                  </button>
+                </td>
+              </tr>
+
+              {/* Second row */}
+              <tr className="hover:bg-gray-100">
+                <td className="py-2 px-4 text-center">2002</td>
+                <td className="py-2 px-4 text-center">Arusa</td>
+                <td className="py-2 px-4 text-center">X-ray</td>
+                <td className="py-2 px-4 text-center">Pending</td>
+                <td className="py-2 px-4 text-center">01/22/12</td>
+                <td className="py-2 px-4 text-center">Edmark</td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    onClick={openModal}
+                  >
+                    Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white rounded-lg p-6 shadow-lg w-96">
             <h2 className="text-xl font-semibold mb-4">Patient Details</h2>
             <p><strong>Name:</strong> Vender</p>
