@@ -18,7 +18,7 @@ class appointmentRepository{
         return $this->mainRepository->executeQuery($query, [":ID" => $id]);
     }
     public function createAppointment($data){
-        $query = "INSERT INTO APPOINTMENT ('APP_TRACK_ID','APP_DATE','SERV_ID','PAT_ID') VALUES (':TRACK_ID',':DATE',':SERV_ID',':PAT_ID')";
+        $query = "INSERT INTO APPOINTMENT (APP_TRACK_ID,APP_DATE,SERV_ID,PAT_ID) VALUES (:TRACK_ID,:DATE,:SERV_ID,:PAT_ID)";
         $params = $this->parameter($data);
         $this->mainRepository->executeQuery($query, $params);
     }

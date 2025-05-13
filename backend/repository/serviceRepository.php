@@ -16,7 +16,7 @@ class serviceRepository{
         return $this->mainRepository->buildResultList($result);
     }
     public function createService($data){
-        $query = "INSERT INTO SERVICE (SERV_NAME) VALUES (':SERV_NAME')";
+        $query = "INSERT INTO SERVICE (SERV_NAME) VALUES (:SERV_NAME)";
         $params = $this->parameter($data);
         $this->mainRepository->executeQuery($query, $params);
     }

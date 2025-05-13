@@ -76,8 +76,7 @@ function AdminLogin() {
           <button className="w-40 mt-10 bg-indigo-600 text-white p-3 rounded-md hover:bg-indigo-700 transition" onClick={handleSubmit}>
             Login
           </button>
-        <div className="text-red-500 mt-4 "> Login Tips:
-        If you cannot remember your Username and/or Password, click Forgot Password.</div>
+          <div className="text-red-500 mt-4 ">{error}</div>
         </div>
       </div>
     );

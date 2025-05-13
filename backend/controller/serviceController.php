@@ -10,7 +10,8 @@ class serviceController{
             $service = $this->serviceService->getAllService();
             echo json_encode(["message" => "Successfully get data", "data" => $service]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured " . $e]);
+            http_response_code(400);
+            echo json_encode(["message" => $e->getMessage()]);
         }
     }
     public function getServiceById($id){
