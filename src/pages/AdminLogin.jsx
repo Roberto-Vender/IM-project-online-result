@@ -60,10 +60,6 @@ function AdminLogin() {
               <label htmlFor="password" className="block text-sm font-medium text-gray-900">
                 Password
               </label>
-              
-              <a href="/ForgotPassword" className=" absolute text-sm bottom-[265px] font-semibold text-indigo-600 hover:text-indigo-500">
-                Forgot password?
-              </a>
           
             </div>
             <input
@@ -80,8 +76,8 @@ function AdminLogin() {
           <button className="w-40 mt-10 bg-indigo-600 text-white p-3 rounded-md hover:bg-indigo-700 transition" onClick={handleSubmit}>
             Login
           </button>
-
-          <div className="text-red-500 mt-4 ">{error}</div>
+        <div className="text-red-500 mt-4 "> Login Tips:
+        If you cannot remember your Username and/or Password, click Forgot Password.</div>
         </div>
       </div>
     );

@@ -26,17 +26,17 @@ function OnlineResult() {
         <div className="bg-white w-[400px] h-[150px] rounded-lg p-0  shadow-lg">
         <div className="flex absolute text-2xl p-4 top-[250px]">Name:
         </div>
-        <div className="flex absolute text-2xl p-4 top-[290px] ">Date:
+        <div className="flex absolute text-2xl p-4 top-[290px] ">Email:
         </div>
-        <div className="flex absolute text-2xl p-4 top-[330px] ">Patiend ID:
+        <div className="flex absolute text-2xl p-4 top-[330px] ">Gender:
         </div>
         </div>
         <div className="bg-white w-[400px] h-[150px] rounded-lg p-0 shadow-lg">
-        <div className="flex absolute text-2xl p-4 top-[250px]">Age:
+        <div className="flex absolute text-2xl p-4 top-[250px]">Contact Number:
         </div>
-        <div className="flex absolute text-2xl p-4 top-[290px] ">Sex:
+        <div className="flex absolute text-2xl p-4 top-[290px] ">Date of Birth:
         </div>
-        <div className="flex absolute text-2xl p-4 top-[330px] ">Test ID:
+        <div className="flex absolute text-2xl p-4 top-[330px] ">Address:
         </div>
         </div>
         </div>
