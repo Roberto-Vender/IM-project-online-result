@@ -30,11 +30,11 @@ class resultService {
     }
     public function resultObject($data){
         $result = new result();
-        $result->setResID($data["res_id"]);
-        $result->setAppID($data["app_id"]);
-        $result->setResFile($data["res_file"]);
-        $result->setResDate($data["res_date"]);
-        $result->setAdminID($data["admin_id"]);
+        $result->setResID($data["res_id"] ?? NULL);
+        $result->setAppID($data["app_id"] ?? NULL);
+        $result->setResFile($data["res_file"] ?? NULL);
+        $result->setResDate($data["res_date"] ?? NULL);
+        $result->setAdminID($data["admin_id"] ?? NULL);
         return $result;
     }
     public function resultObjectList($data){

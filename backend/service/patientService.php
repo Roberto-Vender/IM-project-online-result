@@ -30,16 +30,16 @@ class patientService{
     }
     public function patientObject($data){
         $patient = new patient();
-        $patient->setPatID($data["pat_id"]);
-        $patient->setPatFname($data["pat_fname"]);
-        $patient->setPatLname($data["pat_lname"]);
-        $patient->setPatMname($data["pat_mname"]);
-        $patient->setPatExt($data["pat_extension"]);
-        $patient->setPatGender($data["pat_gender"]);
-        $patient->setPatDob($data["pat_dob"]);
-        $patient->setPatEmail($data["pat_email"]);
-        $patient->setPatAddress($data["pat_address"]);
-        $patient->setPatContact($data["pat_contact"]);
+        $patient->setPatID($data["pat_id"] ?? NULL);
+        $patient->setPatFname($data["pat_fname"] ?? NULL);
+        $patient->setPatLname($data["pat_lname"] ?? NULL);
+        $patient->setPatMname($data["pat_mname"] ?? NULL);
+        $patient->setPatExt($data["pat_extension"] ?? NULL);
+        $patient->setPatGender($data["pat_gender"] ?? NULL);
+        $patient->setPatDob($data["pat_dob"] ?? NULL);
+        $patient->setPatEmail($data["pat_email"] ?? NULL);
+        $patient->setPatAddress($data["pat_address"] ?? NULL);
+        $patient->setPatContact($data["pat_contact"] ?? NULL);
         return $patient;
     }
     public function patientObjectList($data){

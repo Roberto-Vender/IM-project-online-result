@@ -30,8 +30,8 @@ class serviceService{
     }
     public function serviceObject($data){
         $service = new service();
-        $service->setServId($data["serv_id"]);
-        $service->setServName($data["serv_name"]);
+        $service->setServId($data["serv_id"] ?? NULL);
+        $service->setServName($data["serv_name"] ?? NULL);
         return $service;
     }
     public function serviceObjectList($data){
