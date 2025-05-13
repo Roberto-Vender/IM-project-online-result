@@ -48,19 +48,19 @@ class adminController{
             $adminCredentials = $this->adminService->getAdminByUsername($username);
             if($adminCredentials){
                 if($adminCredentials->getAdminUsername() === $username && password_verify($password,$adminCredentials->getAdminPassword())){
-                    echo json_encode(["message" => "Login successfully!", "data" => $adminCredentials]);
                     http_response_code(200);
+                    echo json_encode(["message" => "Login successfully!", "data" => $adminCredentials]);
                 }else{
-                    echo json_encode(["message" => "Incorrect credentials"]);
                     http_response_code(401);
+                    echo json_encode(["message" => "Incorrect credentials"]);
                 }
             }else{
-                echo json_encode(["message" => "Incorrect credentials"]);
                 http_response_code(401);
+                echo json_encode(["message" => "Incorrect credentials"]);
             }
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e->getMessage()]);
             http_response_code(400);
+            echo json_encode(["message" => "an error occured". $e->getMessage()]);
         }
     }
 

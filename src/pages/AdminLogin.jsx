@@ -1,7 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as send from '../js/send.js';
 
 function AdminLogin() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    const loginData = {
+      "admin_username": username,
+      "admin_password" : password
+    }
+    console.log(loginData);
+    const response = await send.login(loginData);
+    if (response.message.includes("successfully")) {
+      localStorage.setItem("credentials", response.data);
+      navigate('/AdminUploadResult');
+    } else {
+      setError("Incorrect Details!Pleas Try Again");
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    }
+  
+  }
     return (
       <div className="relative flex w-full h-screen">
         <img
@@ -18,12 +42,14 @@ function AdminLogin() {
           {/* Email Input */} 
           <div className="mb-6">
             <label htmlFor="email" className="block text-sm font-medium text-black mt-20" >
-              Email address
+              Username
             </label>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="username"
               required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="mt-2 w-72 p-3 rounded-md bg-white text-gray-900 border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600"
             />
           </div>
@@ -42,20 +68,20 @@ function AdminLogin() {
             </div>
             <input
               type="password"
+              value = {password}
               id="password"
               required
+              onChange={(e) => setPassword(e.target.value)}
               className="mt-2 w-72 p-3 rounded-md bg-white text-gray-900 border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600"
             />
           </div>
   
           {/* Submit Button */}
-          <Link to="/AdminUploadResult">
-          <button className="w-40 mt-10 bg-indigo-600 text-white p-3 rounded-md hover:bg-indigo-700 transition">
+          <button className="w-40 mt-10 bg-indigo-600 text-white p-3 rounded-md hover:bg-indigo-700 transition" onClick={handleSubmit}>
             Login
           </button>
-          </Link>
-        <div className="text-red-500 mt-4 "> Login Tips:
-        If you cannot remember your Username and/or Password, click Forgot Password.</div>
+
+          <div className="text-red-500 mt-4 ">{error}</div>
         </div>
       </div>
     );

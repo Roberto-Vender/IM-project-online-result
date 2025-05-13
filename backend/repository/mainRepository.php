@@ -8,8 +8,8 @@ class mainRepository{
         $this->conn = $this->database->getConnection();
     }
     public function buildResultList($data){
-        if(!isset($data[0]) || !$data[0]){
-            throw new Exception($data. 'is null/undefined');
+        if (!isset($data[0]) || empty($data[0])) {
+            throw new Exception("First element in data is null or undefined");
         }
         return $data[0];
     }
