@@ -1,6 +1,15 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import * as fetch from '../js/fetch.js';
+import * as send from '../js/send.js';
 function AdminUploadResult() {
+  const [appointment, setAppointmentList] = useState([]);
+  const loadAppointment = async () => {
+    const response = await fetch.getAllAppointment();
+    setAppointmentList(response.data);
+  }
+  useEffect(() => {
+    loadAppointment();
+  },[]);
   return (
     <div
       className="min-h-screen bg-cover bg-center p-5"
@@ -32,119 +41,25 @@ function AdminUploadResult() {
         </tr>
       </thead>
       <tbody>
-        <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2001</td>
-              <td className="py-2 px-4 text-center">Vender</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
+              {
+                appointment.map((app, index) => (
+                  <tr className="hover:bg-gray-100">
+                    <td className="py-2 px-4 text-center">{ app.app_track_id}</td>
+                    <td className="py-2 px-4 text-center">{`${app.pat_fname} ${app.pat_mname ? app.pat_mname + ' ' : ''}${app.pat_lname}${app.pat_ext ? ' ' + app.pat_ext : ''}`}</td>
+                    <td className="py-2 px-4 text-center">{ app.serv_name}</td>
               <td className="py-2 px-4 text-center">
-                <div className="text-black">05/13/2025</div>
+                      <div className="text-black">{ app.app_date}</div>
               </td>
               <td className="py-2 px-4 text-center ">
                 <div className="flex justify-center space-x-2">
                 <label className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">Choose File
-            <input type="file" className="hidden"  aria-label="Upload File"/> </label>
-
-
-
+                  <input type="file" className="hidden"  aria-label="Upload File"/> </label>
                 </div>
               </td>
             </tr>
-
-            {/* Second row */}
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2002</td>
-              <td className="py-2 px-4 text-center">Arsua</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">
-                <div className="text-black">05/13/2025</div>
-              </td>
-              <td className="py-2 px-4 text-center">
-                <div className="flex justify-center space-x-2">
-                <label className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">Choose File
-                <input type="file" className="hidden"  aria-label="Upload File"/> </label>
-                </div>
-              </td>
-            </tr>
-
-            {/* Third row */}
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2003</td>
-              <td className="py-2 px-4 text-center">Noquanna</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">
-                <div className="text-black">05/13/2025</div>
-              </td>
-              <td className="py-2 px-4 text-center">
-                <div className="flex justify-center space-x-2">
-                <label className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">Choose File
-                <input type="file" className="hidden"  aria-label="Upload File"/> </label>
-                </div>
-              </td>
-            </tr>
-
-            {/* Fourth row */}
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2004</td>
-              <td className="py-2 px-4 text-center">Ayuman</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">
-                <div className="text-black">05/13/2025</div>
-              </td>
-              <td className="py-2 px-4 text-center">
-                <div className="flex justify-center space-x-2">
-                <label className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">Choose File
-                <input type="file" className="hidden"  aria-label="Upload File"/> </label>
-                </div>
-              </td>
-            </tr>
-
-            {/* Fifth row */}
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2005</td>
-              <td className="py-2 px-4 text-center">Abella</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">
-                <div className="text-black">05/13/2025</div>
-              </td>
-              <td className="py-2 px-4 text-center">
-                <div className="flex justify-center space-x-2">
-                <label className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">Choose File
-                <input type="file" className="hidden"  aria-label="Upload File"/> </label>
-                </div>
-              </td>
-            </tr>
-
-            {/* Sixth row */}
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2006</td>
-              <td className="py-2 px-4 text-center">Lorenzo</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">
-                <div className="text-black">05/13/2025</div>
-              </td>
-              <td className="py-2 px-4 text-center">
-                <div className="flex justify-center space-x-2">
-                <label className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">Choose File
-                <input type="file" className="hidden"  aria-label="Upload File"/> </label>
-                </div>
-              </td>
-            </tr>
-
-            <tr className="hover:bg-gray-100">
-              <td className="py-2 px-4 text-center">2006</td>
-              <td className="py-2 px-4 text-center">Lorenzo</td>
-              <td className="py-2 px-4 text-center">X-ray</td>
-              <td className="py-2 px-4 text-center">
-                <div className="text-black">05/13/2025</div>
-              </td>
-              <td className="py-2 px-4 text-center">
-                <div className="flex justify-center space-x-2">
-                <label className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition">Choose File
-                <input type="file" className="hidden"  aria-label="Upload File"/> </label>
-                </div>
-              </td>
-            </tr>
-            
+              ))
+              }        
+        
       </tbody>
     </table>
   </div>

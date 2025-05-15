@@ -10,7 +10,7 @@ class appointmentController{
             $appointment = $this->appointmentService->getAllAppointment();
             echo json_encode(["message" => "Sucessfully get data", "data" => $appointment]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e->getMessage()]);
+            echo json_encode(["message" => $e->getMessage()]);
             http_response_code(400);
         }
     }
@@ -19,7 +19,7 @@ class appointmentController{
             $appointment = $this->appointmentService->getAppointmentById($id);
             echo json_encode(["message" => "Sucessfully get data", "data" => $appointment]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e->getMessage()]);
+            echo json_encode(["message" => $e->getMessage()]);
             http_response_code(400);
         }
     }
@@ -28,7 +28,7 @@ class appointmentController{
             $this->appointmentService->createAppointment($data);
             echo json_encode(["message" => "Sucessfully created appointment"]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e]);
+            echo json_encode(["message" => $e->getMessage()]);
             http_response_code(400);
         }
     }
@@ -37,7 +37,7 @@ class appointmentController{
             $this->appointmentService->updateAppointment($id,$data);
             echo json_encode(["message" => "Sucessfully updated appointment"]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e]);
+            echo json_encode(["message" => $e->getMessage()]);
         }
     }
 }

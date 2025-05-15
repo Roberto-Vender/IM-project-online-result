@@ -12,13 +12,13 @@ class appointmentService{
     public function getAllAppointment(){
         $result = $this->appointmentRepository->getAllAppointment();
         $this->serviceLogic->checkExist($result);
-        return $this->appointmentObjectList($result);
+        return $result;
     
     }
     public function getAppointmentById($id){
         $result = $this->appointmentRepository->getAllAppointmentById($id);
         $this->serviceLogic->checkExist($result);
-        return $this->appointmentObject($result);
+        return $result;
     }
     public function createAppointment($data){
         $appointment = $this->appointmentObject($data);
@@ -34,6 +34,7 @@ class appointmentService{
         $appointment->setAppID($data["app_id"] ?? NULL);
         $appointment->setAppTrackID($data["app_track_id"] ?? NULL);
         $appointment->setAppDate($data["app_date"] ?? NULL);
+        $appointment->setAppResStatus($data["app_res_status"] ?? NULL);
         $appointment->setServID($data["serv_id"] ?? NULL);
         $appointment->setPatID($data["pat_id"] ?? NULL);
         return $appointment;

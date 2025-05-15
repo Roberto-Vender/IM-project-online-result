@@ -10,7 +10,8 @@ class patientController{
             $patient = $this->patientService->getAllPatient();
             echo json_encode(["message" => "Successfully get data", "data" => $patient]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e]);
+            http_response_code(400);
+            echo json_encode(["message" => $e->getMessage()]);
         }
     }
     public function getPatientById($id){
@@ -18,15 +19,18 @@ class patientController{
             $patient = $this->patientService->getPatientById($id);
             echo json_encode(["message" => "Successfully get data", "data" => $patient]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e]);
+            http_response_code(400);
+            echo json_encode(["message" => $e->getMessage()]);
         }
     }
     public function createPatient($data){
         try{
             $this->patientService->createPatient($data);
+            http_response_code(201);
             echo json_encode(["message" => "Successfully created patient"]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e]);
+            http_response_code(400);
+            echo json_encode(["message" =>$e->getMessage()]);
         }
     }
     public function updatedPatient($id,$data){
@@ -34,7 +38,7 @@ class patientController{
             $this->patientService->updatePatient($id,$data);
             echo json_encode(["message" => "Successfully updated patient"]);
         }catch(Exception $e){
-            echo json_encode(["message" => "an error occured". $e]);
+            echo json_encode(["message" => $e->getMessage()]);
         }
     }
 }

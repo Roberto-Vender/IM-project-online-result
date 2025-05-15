@@ -6,35 +6,38 @@ class appointmentRepository{
         $this->mainRepository = new mainRepository();
     }
     public function getAllAppointment(){
-        $query = "SELECT * FROM APPOINTMENT AS A
-        INNER JOIN SERVICE AS S ON A.SERV_ID = S.SERV_ID,
+        $query = "SELECT A.APP_ID,A.APP_DATE,A.APP_TRACK_ID,P.PAT_FNAME,P.PAT_LNAME,P.PAT_MNAME,P.PAT_EXTENSION,P.PAT_ID,S.SERV_ID,S.SERV_NAME FROM APPOINTMENT AS A
+        INNER JOIN SERVICE AS S ON A.SERV_ID = S.SERV_ID
         INNER JOIN PATIENT AS P ON A.PAT_ID = P.PAT_ID";
         return $this->mainRepository->executeQuery($query, []);
     }
     public function getAllAppointmentById($id){
-        $query = "SELECT * FROM APPOINTMENT AS A
-        INNER JOIN SERVICE AS S ON A.SERV_ID = S.SERV_ID,
+        $query = "SELECT A.APP_ID,A.APP_DATE,A.APP_TRACK_ID,P.PAT_FNAME,P.PAT_LNAME,P.PAT_MNAME,P.PAT_EXTENSION,P.PAT_ID,S.SERV_ID,S.SERV_NAME FROM APPOINTMENTS AS A
+        INNER JOIN SERVICE AS S ON A.SERV_ID = S.SERV_ID
         INNER JOIN PATIENT AS P ON A.PAT_ID = P.PAT_ID WHERE A.APP_ID = :ID";
         return $this->mainRepository->executeQuery($query, [":ID" => $id]);
     }
     public function createAppointment($data){
-        $query = "INSERT INTO APPOINTMENT (APP_TRACK_ID,APP_DATE,SERV_ID,PAT_ID) VALUES (:TRACK_ID,:DATE,:SERV_ID,:PAT_ID)";
+        $query = "INSERT INTO APPOINTMENT (APP_TRACK_ID,SERV_ID,PAT_ID) VALUES (:TRACK_ID,:SERV_ID,:PAT_ID)";
         $params = $this->parameter($data);
         $this->mainRepository->executeQuery($query, $params);
     }
     public function updateAppointment($data,$id){
-        $query = "UPDATE APPOINTMENT SET APP_TRACK_ID = :ID , APP_DATE = :DATE , SERV_ID = :SERV_ID, PAT_ID = :PAT_ID";
+        $query = "UPDATE APPOINTMENT SET APP_TRACK_ID = :TRACK_ID , SERV_ID = :SERV_ID, APP_RES_STATUS = :STAT WHERE PAT_ID = :ID";
         $params = $this->parameter($data);
+        $params["ID"] = $id;
         $this->mainRepository->executeQuery($query,$params);
     }
     public function parameter($data){
-        $data = [
+        $params= [
             ":TRACK_ID" => $data->getAppTrackID(),
-            ":DATE" => $data->getAppDate(),
             ":SERV_ID" =>$data->getServID(),
             ":PAT_ID" =>$data->getPatID()
         ];
-        return $data;
+        if(!empty($data->getAppResStatus())){
+            $data[":STAT"] = $data->getAppResStatus();
+        }
+        return $params;
     }
 }
 ?>

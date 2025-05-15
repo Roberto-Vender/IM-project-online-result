@@ -1,8 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import * as fetch from '../js/fetch.js';
+import * as send from '../js/send.js';
+
 
 function AdminControl() {
   const [showPopup1, setShowPopup1] = useState(false);
+  const [password, setPassword] = useState('');
+  const [service, setService] = useState('');
+  const [serviceList, setServiceList] = useState([]);
+  const [adminList, setAdminList] = useState([]);
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [username, setUsername] = useState('');
+  const [popupDetails, setPopUpDetails] = useState([]);
+  const loadServices = async () => {
+    const response = await fetch.getAllService();
+    setServiceList(response.data);
+    console.log(response.data);
+  };
+  const loadAdmin = async () => {
+    const response = await fetch.getAllAdmin();
+    setAdminList(response.data);
+  }
+  useEffect(() => {
+    loadServices();
+  }, []);
+  useEffect(() => {
+    loadAdmin();
+  }, []);
 
+  const handleAddService = async () => {
+    const addService = { "serv_name": service };
+    const response = await send.addService(addService);
+    if (response.message.includes("Successfully")) {
+      console.log(response.message);
+      setService('');
+      await loadServices();
+    }
+    console.log(response.message);
+  }
+  const handleAddAdmin = async() => {
+    const addAdmin = {
+      "admin_fname": firstname,
+      "admin_lname": lastname,
+      "admin_username": username,
+      "admin_password" : password
+    }
+    const response = await send.addAdmin(addAdmin);
+    if (response.message.includes("successfully")) {
+      console.log(response.message);
+      await loadAdmin();
+    } else {
+      console.log(response.message);
+    }
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br bg-[#5bd1cd] flex items-start justify-start p-10">
       <div className="flex flex-col lg:flex-row gap-10 w-full">
@@ -19,73 +70,28 @@ function AdminControl() {
                     <th className="py-2 px-4 text-center">Username</th>
                     <th className="py-2 px-4 text-center">Firstname</th>
                     <th className="py-2 px-4 text-center">Lastname</th>
-                    <th className="py-2 px-4 text-center">Password</th>
                     <th className="py-2 px-4 text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
+                {
+                  adminList.map((adm, index) => (
+                    <tr className="hover:bg-gray-100">
+                      <td className="py-2 px-4 text-center">{adm.admin_username}</td>
+                      <td className="py-2 px-4 text-center">{adm.admin_fname}</td>
+                      <td className="py-2 px-4 text-center">{adm.admin_lname}</td>
+                  <td className="py-2 px-4 text-center">
+                        <img
+                          src="eye.png"
+                          alt="View Password"
+                          className="w-5 h-5 cursor-pointer inline-block"
+                          onClick={() => { setShowPopup1(true); setPopUpDetails(adm)}}
+                    />
+                  </td>
+                </tr>
+                  ))
+                }
                 {/* Admin Row 1 */}
-                <tr className="hover:bg-gray-100">
-                  <td className="py-2 px-4 text-center">admin1</td>
-                  <td className="py-2 px-4 text-center">John</td>
-                  <td className="py-2 px-4 text-center">Doe</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">
-                    <img
-                      src="eye.png" 
-                      alt="View Password"
-                      className="w-5 h-5 cursor-pointer inline-block"
-                      onClick={() => setShowPopup1(true)}
-                    />
-                  </td>
-                </tr>
-
-                {/* Admin Row 2 */}
-                <tr className="hover:bg-gray-100">
-                  <td className="py-2 px-4 text-center">admin2</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">
-                    <img
-                      src="eye.png"
-                      alt="View Password"
-                      className="w-5 h-5 cursor-pointer inline-block"
-                      onClick={() => setShowPopup1(true)}
-                    />
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-gray-100">
-                  <td className="py-2 px-4 text-center">admin2</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">
-                    <img
-                      src="eye.png"
-                      alt="View Password"
-                      className="w-5 h-5 cursor-pointer inline-block"
-                      onClick={() => setShowPopup1(true)}
-                    />
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-gray-100">
-                  <td className="py-2 px-4 text-center">admin2</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">••••••</td>
-                  <td className="py-2 px-4 text-center">
-                    <img
-                      src="eye.png"
-                      alt="View Password"
-                      className="w-5 h-5 cursor-pointer inline-block"
-                      onClick={() => setShowPopup1(true)}
-                    />
-                  </td>
-                </tr>
-                
               </tbody>
 
               </table>
@@ -103,11 +109,11 @@ function AdminControl() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="hover:bg-gray-100"><td className="py-2 px-4 text-center">X-Ray</td></tr>
-                  <tr className="hover:bg-gray-100"><td className="py-2 px-4 text-center">CT Scan</td></tr>
-                  <tr className="hover:bg-gray-100"><td className="py-2 px-4 text-center">MRI</td></tr>
-                  <tr className="hover:bg-gray-100"><td className="py-2 px-4 text-center">Blood Test</td></tr>
-                  <tr className="hover:bg-gray-100"><td className="py-2 px-4 text-center">Ultrasound</td></tr>
+                  {
+                    serviceList.map((serv,index) => (
+                      <tr className="hover:bg-gray-100"><td className="py-2 px-4 text-center">{serv.serv_name}</td></tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
@@ -121,25 +127,52 @@ function AdminControl() {
             <h1 className="text-3xl font-bold text-blue-700 mb-6 text-center">Create Admin Account</h1>
 
             <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">Firstname</label>
+              <input
+                type="text"
+                value={firstname}
+                placeholder="Enter admin firstname"
+                onChange={(e) => setFirstname(e.target.value)}
+                required
+                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">Lastname</label>
+              <input
+                type="text"
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
+                required
+                placeholder="Enter admin lastname"
+                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            <div className="mb-4">
               <label className="block text-gray-700 font-semibold mb-2">Username</label>
               <input
                 type="text"
                 placeholder="Enter admin username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
                 className="w-full px-4 py-2 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
-
             <div className="mb-6">
               <label className="block text-gray-700 font-semibold mb-2" htmlFor="adminPassword">Password</label>
               <input
                 id="adminPassword"
                 type="password"
+                value={password}
                 placeholder="Enter password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 className="w-full px-4 py-2 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-full shadow-md transition duration-300">
+            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-full shadow-md transition duration-300" onClick={handleAddAdmin}>
               Create Account
             </button>
           </div>
@@ -153,11 +186,13 @@ function AdminControl() {
               <input
                 type="text"
                 placeholder="Enter new service"
+                value={service}
+                onChange={(e) => setService(e.target.value)}
                 className="w-full px-4 py-2 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-full shadow-md transition duration-300">
+            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-full shadow-md transition duration-300" onClick={handleAddService}>
               Add Service
             </button>
           </div>
