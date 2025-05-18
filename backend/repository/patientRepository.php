@@ -17,7 +17,7 @@ class patientRepository{
         return $this->mainRepository->buildResultList($result);
     }
     public function createPatient($data){
-        $query = "INSERT INTO PATIENT (PAT_FNAME,PAT_LNAME,PAT_MNAME,PAT_EXTENSION,PAT_DOB,PAT_EMAIL,PAT_ADDRESS,PAT_GENDER,PAT_CONTACT) VALUES (:FNAME,:LNAME,:MNAME,:EXT,:DOB,:EMAIL,:ADD,:NUM,:GENDER)";
+        $query = "INSERT INTO PATIENT (PAT_FNAME,PAT_LNAME,PAT_MNAME,PAT_EXTENSION,PAT_DOB,PAT_EMAIL,PAT_ADDRESS,PAT_GENDER,PAT_CONTACT) VALUES (:FNAME,:LNAME,:MNAME,:EXT,:DOB,:EMAIL,:ADD,:GENDER,:NUM)";
         $params = $this->parameter($data);
         $this->mainRepository->executeQuery($query, $params);
     }

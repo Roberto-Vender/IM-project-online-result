@@ -8,15 +8,15 @@ class adminRepository{
     }
 
     public function getAdmin(){
-        $query = "SELECT ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_FNAME, ADMIN_LNAME FROM ADMIN";
+        $query = "SELECT ADMIN_ID,ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_FNAME, ADMIN_LNAME FROM ADMIN";
         return $this->main_repo->executeQuery($query, []);
     }
     public function getAdminById($id){
-        $query = "SELECT ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_FNAME, ADMIN_LNAME FROM ADMIN WHERE ADMIN_ID = :ID";
+        $query = "SELECT ADMIN_ID,ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_FNAME, ADMIN_LNAME FROM ADMIN WHERE ADMIN_ID = :ID";
         return $this->main_repo->executeQuery($query, ["ID" => $id]);
     }
     public function getAdminByUsername($username){
-        $query = "SELECT ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_FNAME, ADMIN_LNAME FROM ADMIN WHERE ADMIN_USERNAME = :USERNAME";
+        $query = "SELECT ADMIN_ID,ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_FNAME, ADMIN_LNAME FROM ADMIN WHERE ADMIN_USERNAME = :USERNAME";
         $params = [":USERNAME" => $username];
         $result = $this->main_repo->executeQuery($query,$params);
         return $this->main_repo->buildResultList($result);

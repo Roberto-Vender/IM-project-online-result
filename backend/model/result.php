@@ -4,7 +4,7 @@ class result implements JsonSerializable {
     private $res_id;
     private $res_date;
     private $res_file;
-    private $app_id;
+    private $app_track_id;
     private $admin_id;
 
     public function setResID($id){
@@ -25,11 +25,11 @@ class result implements JsonSerializable {
     public function getResFile(){
         return $this->res_file;
     }
-    public function setAppID($id){
-        $this->app_id = $id;
+    public function setAppTrackID($id){
+        $this->app_track_id = $id;
     }
-    public function getAppID(){
-        return $this->app_id;
+    public function getAppTrackID(){
+        return $this->app_track_id;
     }
     public function setAdminID($id){
         $this->admin_id = $id;
@@ -44,7 +44,7 @@ class result implements JsonSerializable {
             'res_id' => $this->res_id,
             'res_date' => $this->res_date,
             'res_file' => $this->res_file,
-            'app_id' => $this->app_id,
+            'app_track_id' => $this->app_track_id,
             'admin_id' => $this->admin_id,
         ];
     }

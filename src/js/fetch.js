@@ -12,3 +12,7 @@ export async function getAllAppointment() {
     const response = await fetch(base_url + 'Appointment');
     return await response.json();
 }
+export async function getAllResult() {
+    const response = await fetch(base_url + 'Result');
+    return await response.json();
+}

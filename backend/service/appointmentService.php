@@ -27,7 +27,7 @@ class appointmentService{
     public function updateAppointment($id,$data){
         $this->getAppointmentById($id);
         $appointment = $this->appointmentObject($data);
-        $this->appointmentRepository->updateAppointment($appointment,$id);
+        $this->appointmentRepository->updateAppointment($id,$appointment);
     }
     public function appointmentObject($data){
         $appointment = new appointment();

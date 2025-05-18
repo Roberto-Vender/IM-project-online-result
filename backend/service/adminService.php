@@ -39,12 +39,7 @@ class adminService{
     public function adminObjectList($admin){
         $adminList = [];
         foreach ($admin as $data) {
-            $admin = new admin();
-            $admin->setAdminUsername($data['admin_username']);
-            $admin->setAdminPassword($data['admin_password']);
-            $admin->setAdminFname($data['admin_fname']);
-            $admin->setAdminLname($data['admin_lname']);
-            $adminList[] = $admin;
+            $adminList[] = $this->adminObject($data);
         }
         return $adminList;
     }

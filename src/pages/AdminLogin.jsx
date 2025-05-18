@@ -15,8 +15,9 @@ function AdminLogin() {
     }
     console.log(loginData);
     const response = await send.login(loginData);
+    console.log(response.data);
     if (response.message.includes("successfully")) {
-      localStorage.setItem("credentials", response.data);
+      localStorage.setItem("credentials", JSON.stringify(response.data));
       navigate('/AdminUploadResult');
     } else {
       setError("Incorrect Details!Pleas Try Again");

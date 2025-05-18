@@ -50,6 +50,7 @@ class Router{
                 $this->postRequest("Result",$requestUri,$this->resultController,"createResult");
                 break;
             case 'PUT':
+                $this->putRequest("Appointment",$requestUri,$this->appointmentController,"updateAppointment");
                 break;
             default:
                 http_response_code(404);
@@ -69,11 +70,20 @@ class Router{
                 $controller->$methodById($matches[1]);
             }
     }
-    private function postRequest($model,$requestUri,$controller,$method){
-                if ($requestUri === "/api/{$model}") {
-                    $entity = json_decode(file_get_contents("php://input"), true);
-                    $controller->$method($entity);
-                }
+    private function postRequest($model, $requestUri, $controller, $method)
+    {
+        error_log("Request URI: " . $_SERVER['REQUEST_URI'] . " Method: " . $_SERVER['REQUEST_METHOD']);
+        if ($requestUri === "/api/{$model}") {
+
+            // If file is uploaded (multipart/form-data)
+            if (!empty($_FILES)) {
+                $controller->$method(); // Let controller directly access $_FILES and $_POST
+            } else {
+                // For JSON data
+                $entity = json_decode(file_get_contents("php://input"), true);
+                $controller->$method($entity);
+            }
+        }
     }
     private function putRequest($model,$requestUri,$controller,$method){
             if (preg_match("/\/api\/{$model}\/Update\/(\d+)/", $requestUri, $matches)) {

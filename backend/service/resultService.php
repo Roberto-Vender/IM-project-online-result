@@ -1,6 +1,6 @@
 <?php
 require_once "repository/resultRepository.php";
-require_once "model/service.php";
+require_once "model/result.php";
 require_once "service/serviceLogic.php";
 class resultService {
     private resultRepository $resultRepository;
@@ -12,12 +12,12 @@ class resultService {
     public function getAllResult(){
         $result = $this->resultRepository->getAllResult();
         $this->serviceLogic->checkExist($result);
-        return $this->resultObjectList($result);
+        return $result;
     }
     public function getResultId($id){
         $result = $this->resultRepository->getAllResultById($id);
         $this->serviceLogic->checkExist($result);
-        return $this->resultObject($result);
+        return $result;
     }
     public function createResult($data){
         $result = $this->resultObject($data);
@@ -31,7 +31,7 @@ class resultService {
     public function resultObject($data){
         $result = new result();
         $result->setResID($data["res_id"] ?? NULL);
-        $result->setAppID($data["app_id"] ?? NULL);
+        $result->setAppTrackID($data["app_track_id"] ?? NULL);
         $result->setResFile($data["res_file"] ?? NULL);
         $result->setResDate($data["res_date"] ?? NULL);
         $result->setAdminID($data["admin_id"] ?? NULL);
