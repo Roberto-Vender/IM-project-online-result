@@ -5,6 +5,7 @@ require_once "controller/appointmentController.php";
 require_once "controller/patientController.php";
 require_once "controller/resultController.php";
 require_once "controller/serviceController.php";
+require_once "service/EmailService.php";
 
 header("Content-Type: application/json");
 header('Access-Control-Allow-Origin: *');
@@ -17,6 +18,7 @@ class Router{
     private patientController $patientController;
     private resultController $resultController;
     private serviceController $serviceController;
+    private EmailService $emailService;
     
     public function __construct()
     {
@@ -25,6 +27,7 @@ class Router{
         $this->patientController = new patientController();
         $this->resultController = new resultController();
         $this->serviceController = new serviceController();
+        $this->emailService = new EmailService();
     }
 
     public function route()
@@ -48,6 +51,7 @@ class Router{
                 $this->postRequest("Appointment",$requestUri,$this->appointmentController,"createAppointment");
                 $this->postRequest("Patient",$requestUri,$this->patientController,"createPatient");
                 $this->postRequest("Result",$requestUri,$this->resultController,"createResult");
+                $this->postRequest("Send/Result",$requestUri,$this->emailService,"sendMail");
                 break;
             case 'PUT':
                 $this->putRequest("Appointment",$requestUri,$this->appointmentController,"updateAppointment");

@@ -43,6 +43,17 @@ export async function addResult(data) {
     });
     return await response.json();
 }
+export async function sendEmail(data) {
+    const response = await fetch(base_url + "Send/Result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return await response.json();
+}
 export async function updateAppointment(id, data) {
     console.log(id);
     const response = await fetch(`${base_url}Appointment/Update/${id}`, {

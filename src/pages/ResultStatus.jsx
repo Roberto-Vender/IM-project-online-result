@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as fetch from '../js/fetch.js';
+import * as send from '../js/send.js';
 function ResultStatus() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [resultApp, setResultApp] = useState([]);
@@ -15,6 +16,29 @@ function ResultStatus() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const sendEmail = async (res) => {
+    const data = {
+      email: res.pat_email,
+      fullname: `${res.pat_fname} ${res.pat_mname ? res.pat_mname + ' ' : ''}${res.pat_lname}${res.pat_extension ? ' ' + res.pat_extension : ''}`,
+      file: res.res_file,
+      subject: 'Medical Result for ' + res.serv_name,
+      body: `Dear ${res.pat_fname},<br><br>
+        Your medical result for <strong>${res.serv_name}</strong> is now available.<br><br>
+        Please click the link below to view and download your result:<br>
+        Best regards,<br>
+        The Medical Team`
+    };
+  
+    console.log(data);
+  
+    const response = await send.sendEmail(data);
+    if (response.message.includes('success')) {
+      alert('Email sent successfully!');
+    } else {
+      alert('Failed to send email. Please try again later.');
+    }
+  };
+  
   useEffect(() => {
     resultList();
   },[]);
@@ -47,15 +71,20 @@ function ResultStatus() {
                 <th className="py-2 px-4 text-center">Date Uploaded</th>
                 <th className="py-2 px-4 text-center">Uploaded By</th>
                 <th className="py-2 px-4 text-center">Details</th>
+                <th className="py-2 px-4 text-center">Action</th> {/* New column header */}
               </tr>
             </thead>
             <tbody>
               {resultApp.map((res, index) => (
-                <tr className="hover:bg-gray-100">
+                <tr className="hover:bg-gray-100" key={index}>
                 <td className="py-2 px-4 text-center">{res.app_track_id}</td>
                 <td className="py-2 px-4 text-center">{res.pat_fname}</td>
                 <td className="py-2 px-4 text-center">{res.serv_name}</td>
-                  <td className="py-2 px-4 text-center">{<a href={`http://localhost:8000/uploads/results/${res.res_file}`} target='_blank' > <u>{ res.res_file}</u> </a>}</td>
+                  <td className="py-2 px-4 text-center">
+                    <a href={`http://localhost:8000/uploads/results/${res.res_file}`} target='_blank' rel="noopener noreferrer">
+                      <u>{res.res_file}</u>
+                    </a>
+                  </td>
                   <td className="py-2 px-4 text-center">{ res.app_date}</td>
                   <td className="py-2 px-4 text-center">{ `${res.admin_fname+" "+res.admin_lname}`}</td>
                 <td className="py-2 px-4 text-center">
@@ -64,6 +93,14 @@ function ResultStatus() {
                     onClick={()=> openModal(res)}
                   >
                     Details
+                  </button>
+                </td>
+                <td className="py-2 px-4 text-center">
+                  <button
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                    onClick={() => sendEmail(res)}
+                  >
+                    Send Email
                   </button>
                 </td>
               </tr>
